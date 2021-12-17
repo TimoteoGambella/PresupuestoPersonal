@@ -177,11 +177,13 @@ body {
     float: left;
     width: 370px;
     margin-right: 70px;
+    margin-bottom: 40px;
 }
 
 .egreso {
     float: left;
     width: 370px;
+    margin-bottom: 40px;
 }
 
 h2 {
