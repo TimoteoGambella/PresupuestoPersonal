@@ -1,14 +1,9 @@
-const ingresos = [
-    new ingreso ("venta",1800.00),
-    new ingreso ("coche",1500.00)
-]
+const ingresos = []
 
-const egresos = [
-    new egreso ("cocaa",1000.00),
-    new egreso ("ropa",1800.00)
-]
+const egresos = []
 
 let cargarApp = ()=>{
+    buscarStorage()
     cargarCabecero()
     cargarIngresos()
     cargarEgresos()
@@ -74,9 +69,13 @@ const crearIngresoHTML = (ingreso) =>{
 
 const eliminarIngreso=(id)=>{
     let indiceEliminar = ingresos.findIndex(ingreso=>ingreso.id===id)
-    ingresos.splice(indiceEliminar,1)
-    cargarCabecero()
-    cargarIngresos()
+    let respuesta = confirm("Esta seguro que desea eliminar "+ ingresos[indiceEliminar]._descripcion)
+    if(respuesta){
+        ingresos.splice(indiceEliminar,1)
+        cargarCabecero()
+        cargarIngresos()
+        actualizarStorage()
+    }
 }
 
 const cargarEgresos = () =>{
@@ -108,9 +107,13 @@ const crearEgresoHTML = (egreso) =>{
 
 const eliminarEgreso=(id)=>{
     let indiceEliminar = egresos.findIndex(egreso=>egreso.id===id)
-    egresos.splice(indiceEliminar,1)
-    cargarCabecero()
-    cargarEgresos()
+    let respuesta = confirm("Esta seguro que desea eliminar "+ egresos[indiceEliminar]._descripcion)
+    if(respuesta){
+        egresos.splice(indiceEliminar,1)
+        cargarCabecero()
+        cargarEgresos()
+        actualizarStorage()
+    }
 }
 
 let agregarDato = ()=>{
@@ -130,11 +133,38 @@ let agregarDato = ()=>{
         }
         limpiarDescripcion()
     }
+    actualizarStorage()
 }
 
 const limpiarDescripcion=()=>{
     let forma=document.forms["forma"]
     forma["descripcion"].value=""
     forma["valor"].value=""
+}
 
+const buscarStorage=()=>{
+    let ingresosStorage = localStorage.getItem("INGRESOS")
+    if(!ingresosStorage){
+        localStorage.setItem("INGRESOS",ingresos)
+    }else{
+        let movimientos = JSON.parse(ingresosStorage)
+        for(let i = 0;i<movimientos.length;i++){
+            ingresos.push(new ingreso(movimientos[i]._descripcion,movimientos[i]._valor))
+        }
+    }
+
+    let egresosStorage = localStorage.getItem("EGRESOS")
+    if(!egresosStorage){
+        localStorage.setItem("EGRESOS",egresos)
+    }else{
+        let movimientos2 = JSON.parse(egresosStorage)
+        for(let i = 0;i<movimientos2.length;i++){
+            egresos.push(new egreso(movimientos2[i]._descripcion,movimientos2[i]._valor))
+        }
+    }
+}
+
+const actualizarStorage=()=>{
+    localStorage.setItem("INGRESOS",JSON.stringify(ingresos))
+    localStorage.setItem("EGRESOS",JSON.stringify(egresos))
 }
