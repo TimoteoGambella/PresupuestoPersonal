@@ -128,6 +128,7 @@ let agregarDato = ()=>{
             cargarCabecero()
             cargarEgresos()
         }
+        limpiarDescripcion()
     }
 }
 
