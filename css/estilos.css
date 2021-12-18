@@ -208,6 +208,11 @@ h2 {
     float: left;
 }
 
+.elemento_fecha{
+    padding-right: 10px;
+    float: left;
+}
+
 .elemento_valor {
     float: left;
     transition: transform 0.3s;

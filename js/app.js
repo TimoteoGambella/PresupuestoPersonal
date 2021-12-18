@@ -52,6 +52,7 @@ const cargarIngresos=()=>{
 const crearIngresoHTML = (ingreso) =>{
     let ingresoHTML=`
     <div class="elemento limpiarEstilos">
+        <div class="elemento_fecha">${ingreso._fecha}</div>
         <div class="elemento_descripcion"> ${ingreso.descripcion}</div>
         <div class="derecha limpiarEstilos">
             <div class="elemento_valor">+ ${formatoMoneda(ingreso.valor)}</div>
@@ -89,6 +90,7 @@ const cargarEgresos = () =>{
 const crearEgresoHTML = (egreso) =>{
     let egresoHTML=`
     <div class="elemento limpiarEstilos">
+        <div class="elemento_fecha">${egreso._fecha}</div>
         <div class="elemento_descripcion">${egreso.descripcion}</div>
         <div class="derecha limpiarEstilos">
             <div class="elemento_valor">- ${formatoMoneda(egreso.valor)}</div>
@@ -150,7 +152,7 @@ const buscarStorage=()=>{
     }else{
         let movimientos = JSON.parse(ingresosStorage)
         for(let i = 0;i<movimientos.length;i++){
-            ingresos.push(new ingreso(movimientos[i]._descripcion,movimientos[i]._valor))
+            ingresos.push(new ingreso(movimientos[i]._descripcion,movimientos[i]._valor,movimientos[i]._fecha))
         }
     }
 
@@ -160,7 +162,7 @@ const buscarStorage=()=>{
     }else{
         let movimientos2 = JSON.parse(egresosStorage)
         for(let i = 0;i<movimientos2.length;i++){
-            egresos.push(new egreso(movimientos2[i]._descripcion,movimientos2[i]._valor))
+            egresos.push(new egreso(movimientos2[i]._descripcion,movimientos2[i]._valor,movimientos2[i]._fecha))
         }
     }
 }
