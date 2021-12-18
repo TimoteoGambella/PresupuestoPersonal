@@ -121,13 +121,14 @@ let agregarDato = ()=>{
     let tipo = forma["tipo"]
     let descripcion=forma["descripcion"]
     let valor=forma["valor"]
+    let fecha = forma["fecha"]
     if(descripcion.value!=="" && valor.value!==""){
         if(tipo.value==="ingreso"){
-            ingresos.push(new ingreso(descripcion.value,Number(valor.value)))
+            ingresos.push(new ingreso(descripcion.value,Number(valor.value),fecha.value))
             cargarCabecero()
             cargarIngresos()
         }else if(tipo.value==="egreso"){
-            egresos.push(new egreso(descripcion.value,Number(valor.value)))
+            egresos.push(new egreso(descripcion.value,Number(valor.value),fecha.value))
             cargarCabecero()
             cargarEgresos()
         }
